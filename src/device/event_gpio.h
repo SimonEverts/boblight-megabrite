@@ -44,6 +44,11 @@ SOFTWARE.
 #define PUD_DOWN 1
 #define PUD_UP   2
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 int gpio_export(unsigned int gpio);
 int gpio_unexport(unsigned int gpio);
 void exports_cleanup(void);
@@ -62,3 +67,8 @@ int gpio_is_evented(unsigned int gpio);
 int event_initialise(void);
 void event_cleanup(void);
 int blocking_wait_for_edge(unsigned int gpio, unsigned int edge);
+
+#ifdef __cplusplus
+}
+#endif
+

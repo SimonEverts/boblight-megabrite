@@ -38,6 +38,11 @@ int pwm_pins[120];
 
 char ctrl_dir[35];
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 int get_gpio_number(const char *key, unsigned int *gpio);
 int get_pwm_key(const char *input, char *key);
 int get_adc_ain(const char *key, unsigned int *ain);
@@ -47,3 +52,7 @@ int load_device_tree(const char *name);
 int unload_device_tree(const char *name);
 int setup_error;
 int module_setup;
+
+#ifdef __cplusplus
+}
+#endif

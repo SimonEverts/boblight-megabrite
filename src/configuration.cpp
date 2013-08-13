@@ -779,6 +779,17 @@ bool CConfig::BuildDeviceConfig(std::vector<CDevice*>& devices, CClientsHandler&
       return false;
 #endif
     }
+    else if (type == "mbrite")
+    {
+      CDevice* device = NULL;
+      if (!BuildMBrite(device, i, clients))
+      {
+        if (device)
+          delete device;
+        return false;
+      }
+      devices.push_back(device);
+    }
     else
     {
       LogError("%s line %i: unknown type %s", m_filename.c_str(), linenr, type.c_str());
@@ -1136,6 +1147,37 @@ bool CConfig::BuildSPI(CDevice*& device, int devicenr, CClientsHandler& clients,
   return true;
 }
 #endif
+
+bool CConfig::BuildMBrite(CDevice*& device, int devicenr, CClientsHandler& clients)
+{
+    {
+      CDeviceMBrite* mbritedevice = new CDeviceMBrite(clients);
+      device = mbritedevice;
+
+      if (!SetDeviceName(mbritedevice, devicenr))
+        return false;
+
+      if (!SetDeviceOutput(mbritedevice, devicenr))
+        return false;
+
+      if (!SetDeviceChannels(mbritedevice, devicenr))
+        return false;
+
+      if (!SetDeviceInterval(mbritedevice, devicenr))
+        return false;
+
+      if (!SetDeviceRate(mbritedevice, devicenr))
+        return false;
+
+      SetDeviceAllowSync(device, devicenr);
+      SetDeviceDebug(device, devicenr);
+      SetDeviceThreadPriority(device, devicenr);
+
+      device->SetType(MBRITE);
+
+      return true;
+    }
+}
 
 bool CConfig::SetDeviceName(CDevice* device, int devicenr)
 {

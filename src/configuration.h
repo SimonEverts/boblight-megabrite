@@ -28,6 +28,7 @@
 #include "device/device.h"
 #include "device/devicers232.h"
 #include "device/devicedioder.h"
+#include "device/devicembrite.h"
 
 #ifdef HAVE_LIBPORTAUDIO
   #include "device/devicesound.h"
@@ -112,6 +113,8 @@ class CConfig
 #ifdef HAVE_LINUX_SPI_SPIDEV_H
     bool BuildSPI(CDevice*& device, int devicenr, CClientsHandler& clients, const std::string& type);
 #endif
+
+    bool BuildMBrite(CDevice*& device, int devicenr, CClientsHandler& clients);
 
     bool SetDeviceName(CDevice* device, int devicenr);
     bool SetDeviceOutput(CDevice* device, int devicenr);

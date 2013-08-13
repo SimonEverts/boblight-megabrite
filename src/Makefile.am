@@ -75,6 +75,9 @@ boblightd_SOURCES = \
 	device/devicers232.cpp \
 	device/deviceltbl.cpp \
 	device/devicedioder.cpp \
+	device/devicembrite.cpp \
+	device/event_gpio.c \
+	device/common.c \
         util/signaltimer.cpp
 
 boblightd_LDFLAGS =
